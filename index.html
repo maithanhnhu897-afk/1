@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai Thanh Như | Portfolio & Personal Space</title>
+    
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS (Animate On Scroll) CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        skyCanvas: '#f0f7ff',
+                        skyLight: '#e0f2fe',
+                        electricCyan: '#00f2fe',
+                        deepIndigo: '#6a11cb',
+                        royalBlue: '#2575fc',
+                    },
+                    animation: {
+                        'float-slow': 'float 7s ease-in-out infinite',
+                        'float-medium': 'float 5s ease-in-out infinite',
+                        'float-fast': 'float 3.5s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-18px) rotate(2deg)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.5, transform: 'scale(1)' },
+                            '50%': { opacity: 0.85, transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Awwwards Aesthetics, Glassmorphism & Mesh -->
+    <style>
+        :root {
+            --bg-primary: #eef6ff;
+            --accent-cyan: #00f2fe;
+            --accent-indigo: #6a11cb;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f4f9ff 0%, #e1f0ff 45%, #ebe8ff 100%);
+            color: #0f172a;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle Architectural Tech Grid Overlay */
+        .bg-tech-grid {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(37, 117, 252, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(106, 17, 203, 0.05) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Cards (Light Mode Optimized) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 
+                0 10px 30px -5px rgba(37, 117, 252, 0.08),
+                0 4px 12px -2px rgba(106, 17, 203, 0.05),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.82);
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 
+                0 20px 40px -10px rgba(37, 117, 252, 0.16),
+                0 0 25px rgba(0, 242, 254, 0.2);
+        }
+
+        /* Navbar Glass */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.07);
+        }
+
+        /* Glowing Headings & Gradient Text */
+        .gradient-text {
+            background: linear-gradient(120deg, #0284c7 0%, #6a11cb 55%, #00c6ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textShine 6s linear infinite;
+        }
+
+        @keyframes textShine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .title-glow {
+            text-shadow: 
+                0 0 28px rgba(0, 242, 254, 0.45),
+                0 0 55px rgba(106, 17, 203, 0.22);
+        }
+
+        /* Ambient Sky Orbs */
+        .sky-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Custom Progress Bar Shimmer */
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #00f2fe 0%, #2575fc 50%, #6a11cb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+
+        /* Social Button Hover Glow */
+        .social-pill {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+        .social-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #00f2fe, #6a11cb);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 0;
+        }
+        .social-pill:hover::before {
+            opacity: 1;
+        }
+        .social-pill:hover {
+            transform: translateY(-4px) scale(1.03);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 12px 25px -5px rgba(106, 17, 203, 0.35);
+        }
+        .social-pill > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #eef6ff;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #38bdf8, #6a11cb);
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="bg-tech-grid antialiased selection:bg-deepIndigo selection:text-white">
+
+    <!-- Particle Network Canvas -->
+    <canvas id="sky-particles" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- Ambient Atmospheric Sky Orbs -->
+    <div class="sky-orb w-[500px] h-[500px] bg-sky-300/40 -top-24 -left-24 animate-pulse-glow"></div>
+    <div class="sky-orb w-[450px] h-[450px] bg-indigo-400/25 top-1/3 -right-24 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+    <div class="sky-orb w-[550px] h-[550px] bg-cyan-300/30 bottom-0 left-1/4 animate-pulse-glow" style="animation-delay: 3s;"></div>
+
+    <!-- Floating Navigation Bar -->
+    <header class="fixed top-5 left-0 right-0 z-50 px-4">
+        <nav class="max-w-5xl mx-auto glass-nav rounded-full px-6 py-3 flex items-center justify-between">
+            <a href="#hero" class="font-display font-extrabold text-xl tracking-tight flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-gradient-to-tr from-electricCyan to-deepIndigo shadow-[0_0_12px_#00f2fe]"></span>
+                <span class="gradient-text">MTN.</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
+                <a href="#about" class="hover:text-deepIndigo transition-colors">Giới thiệu</a>
+                <a href="#strengths" class="hover:text-deepIndigo transition-colors">Thế mạnh</a>
+                <a href="#showcase" class="hover:text-deepIndigo transition-colors">Hoạt động</a>
+                <a href="#memories" class="hover:text-deepIndigo transition-colors">Góc cảm xúc</a>
+            </div>
+
+            <a href="#connect" class="px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-white bg-gradient-to-r from-sky-500 via-royalBlue to-deepIndigo shadow-md hover:shadow-[0_0_20px_rgba(0,242,254,0.6)] transition-all duration-300">
+                Kết nối
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="min-h-screen flex items-center pt-28 pb-16 px-6">
+            <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Identity & Intro -->
+                <div class="lg:col-span-7 space-y-6" data-aos="fade-up" data-aos-duration="900">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-card text-xs font-semibold tracking-wide text-deepIndigo">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-electricCyan opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-sky-500"></span>
+                        </span>
+                        <span>THPT CHUYÊN BẾN TRE &bull; SKYLINE PORTFOLIO</span>
+                    </div>
+
+                    <h1 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.08] text-slate-900 title-glow">
+                        Xin chào, mình là <br>
+                        <span class="gradient-text">Mai Thanh Như</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg font-medium text-slate-700 leading-relaxed max-w-2xl border-l-4 border-electricCyan pl-4 bg-white/40 py-2 rounded-r-xl">
+                        Học sinh THPT Chuyên Bến Tre <span class="text-deepIndigo font-bold">|</span> Định hướng Toán học – Khoa học tự nhiên <span class="text-deepIndigo font-bold">|</span> Người học tập suốt đời
+                    </p>
+
+                    <!-- Tagline Pills -->
+                    <div class="flex flex-wrap items-center gap-3 pt-1">
+                        <span class="px-4 py-1.5 rounded-full bg-white/80 border border-sky-200 text-xs font-semibold text-sky-700 shadow-sm">
+                            <i class="fa-solid fa-compass text-electricCyan mr-1.5"></i>Curious Mind
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full bg-white/80 border border-indigo-200 text-xs font-semibold text-deepIndigo shadow-sm">
+                            <i class="fa-solid fa-square-root-variable text-deepIndigo mr-1.5"></i>Logical Thinker
+                        </span>
+                        <span class="px-4 py-1.5 rounded-full bg-white/80 border border-cyan-200 text-xs font-semibold text-cyan-800 shadow-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles text-sky-500 mr-1.5"></i>Creative Soul
+                        </span>
+                    </div>
+
+                    <div class="pt-4 flex flex-wrap items-center gap-4">
+                        <a href="#about" class="group px-7 py-3.5 rounded-2xl font-display font-semibold text-white bg-gradient-to-r from-sky-500 to-deepIndigo shadow-lg shadow-sky-500/25 hover:shadow-indigo-500/40 transition-all duration-300 flex items-center gap-2">
+                            Khám phá hành trình
+                            <i class="fa-solid fa-arrow-down-long group-hover:translate-y-1 transition-transform"></i>
+                        </a>
+                        <a href="#memories" class="px-7 py-3.5 rounded-2xl font-display font-semibold text-slate-700 glass-card hover:text-deepIndigo flex items-center gap-2">
+                            <i class="fa-regular fa-images text-sky-500"></i>
+                            Góc ký ức
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: 3D Floating Portrait Card -->
+                <div class="lg:col-span-5 flex justify-center relative" data-aos="zoom-in" data-aos-duration="1000">
+                    <!-- Floating Decorative Badges -->
+                    <div class="hidden sm:flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card absolute -top-6 -left-4 z-20 animate-float-slow">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-electricCyan to-sky-500 flex items-center justify-center text-white font-bold shadow">
+                            &pi;
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-500 font-medium">Tư duy</p>
+                            <p class="text-xs font-bold text-slate-800">Toán học & Logic</p>
+                        </div>
+                    </div>
+
+                    <div class="hidden sm:flex items-center gap-2.5 px-4 py-2.5 rounded-2xl glass-card absolute -bottom-5 -right-2 z-20 animate-float-medium">
+                        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-deepIndigo to-purple-500 flex items-center justify-center text-white shadow">
+                            <i class="fa-solid fa-music text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-500 font-medium">Cảm hứng</p>
+                            <p class="text-xs font-bold text-slate-800">Âm nhạc & Nghệ thuật</p>
+                        </div>
+                    </div>
+
+                    <!-- Main 3D Tilt Avatar Card -->
+                    <div class="tilt-card w-full max-w-[360px] p-4 rounded-[2rem] glass-card relative group" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.35">
+                        <div class="relative rounded-[1.5rem] overflow-hidden aspect-[4/5] bg-gradient-to-b from-sky-200 to-indigo-100">
+                            <img 
+                                src="avatar-nhu.jpg" 
+                                alt="Mai Thanh Như" 
+                                onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80'"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <p class="text-xs uppercase tracking-widest text-electricCyan font-semibold">Bến Tre, Việt Nam</p>
+                                <p class="font-display font-bold text-lg">Mai Thanh Như</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="py-20 px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="glass-card rounded-[2.25rem] p-8 sm:p-12 lg:p-14 relative overflow-hidden" data-aos="fade-up">
+                    <!-- Subtle Corner Glow -->
+                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-electricCyan/30 to-deepIndigo/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="flex flex-col md:flex-row gap-10 items-start">
+                        <div class="md:w-1/3 space-y-3">
+                            <span class="text-xs font-bold uppercase tracking-[0.2em] text-deepIndigo">01 / Về bản thân</span>
+                            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 title-glow">
+                                Tri thức, Lý trí & <span class="gradient-text">Cảm xúc</span>
+                            </h2>
+                            <div class="w-16 h-1.5 rounded-full bg-gradient-to-r from-electricCyan to-deepIndigo"></div>
+                        </div>
+
+                        <div class="md:w-2/3 space-y-5 text-slate-700 text-base sm:text-lg leading-relaxed">
+                            <p>
+                                Xin chào, mình là <strong class="text-slate-900 font-semibold">Mai Thanh Như</strong> – một học sinh yêu thích khám phá tri thức, đặc biệt hứng thú với <span class="text-sky-700 font-semibold">Toán học, khoa học tự nhiên</span> và những vấn đề đòi hỏi tư duy logic.
+                            </p>
+                            <p>
+                                Mình tin rằng học tập không chỉ là tích lũy kiến thức mà còn là hành trình rèn luyện tư duy, khám phá giới hạn của bản thân và không ngừng hoàn thiện chính mình. Mình luôn hướng đến sự cân bằng giữa <span class="text-deepIndigo font-semibold">tư duy lý trí</span>, <span class="text-sky-600 font-semibold">khả năng sáng tạo</span> và một <span class="text-indigo-600 font-semibold">trái tim giàu cảm xúc</span>.
+                            </p>
+
+                            <!-- Mantra Highlight Box -->
+                            <div class="pt-3">
+                                <div class="inline-flex flex-wrap items-center gap-3 px-5 py-3 rounded-2xl bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-300/60">
+                                    <span class="font-display font-bold text-sm sm:text-base tracking-wide gradient-text">
+                                        Curious Mind &middot; Logical Thinker &middot; Creative Soul
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRENGTHS & PASSIONS SECTION -->
+        <section id="strengths" class="py-20 px-6">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center max-w-2xl mx-auto space-y-3" data-aos="fade-up">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-deepIndigo">02 / Năng lực & Đam mê</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 title-glow">
+                        Thế mạnh & <span class="gradient-text">Lĩnh vực tâm đắc</span>
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base">
+                        Sự giao thoa giữa những con số chính xác, lập luận sắc bén và giai điệu nghệ thuật.
+                    </p>
+                </div>
+
+                <!-- 4 Interactive 3D Tilt Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    
+                    <!-- Card 1: Tư duy logic & Toán học -->
+                    <div class="tilt-card glass-card rounded-3xl p-7 space-y-5" data-tilt data-tilt-max="8" data-tilt-speed="400" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-sky-400/30">
+                                <i class="fa-solid fa-infinity"></i>
+                            </div>
+                            <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-sky-100 text-sky-700 border border-sky-200">
+                                Thế mạnh cốt lõi
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-900">Tư duy logic & Toán học</h3>
+                            <p class="text-slate-600 text-sm mt-1.5 leading-relaxed">
+                                Đam mê cấu trúc toán học, suy luận chặt chẽ và tìm kiếm vẻ đẹp tinh giản ẩn sau các định lý khoa học tự nhiên.
+                            </p>
+                        </div>
+                        <!-- Passion Meter -->
+                        <div class="space-y-2 pt-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span class="text-slate-500">Mức độ đam mê</span>
+                                <span class="text-deepIndigo">96%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                                <div class="progress-bar-fill h-full rounded-full" style="width: 96%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Phân tích và giải quyết vấn đề -->
+                    <div class="tilt-card glass-card rounded-3xl p-7 space-y-5" data-tilt data-tilt-max="8" data-tilt-speed="400" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-electricCyan to-teal-500 flex items-center justify-center text-slate-900 text-2xl shadow-lg shadow-cyan-400/30">
+                                <i class="fa-solid fa-diagram-project"></i>
+                            </div>
+                            <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-cyan-100 text-cyan-800 border border-cyan-200">
+                                Thế mạnh tư duy
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-900">Phân tích và giải quyết vấn đề</h3>
+                            <p class="text-slate-600 text-sm mt-1.5 leading-relaxed">
+                                Bóc tách vấn đề phức tạp thành từng mắt xích rõ ràng, đánh giá đa chiều để tối ưu hóa giải pháp.
+                            </p>
+                        </div>
+                        <!-- Passion Meter -->
+                        <div class="space-y-2 pt-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span class="text-slate-500">Mức độ đam mê</span>
+                                <span class="text-deepIndigo">94%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                                <div class="progress-bar-fill h-full rounded-full" style="width: 94%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Âm nhạc -->
+                    <div class="tilt-card glass-card rounded-3xl p-7 space-y-5" data-tilt data-tilt-max="8" data-tilt-speed="400" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-deepIndigo to-purple-600 flex items-center justify-center text-white text-2xl shadow-lg shadow-purple-500/30">
+                                <i class="fa-solid fa-headphones-simple"></i>
+                            </div>
+                            <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-deepIndigo border border-purple-200">
+                                Sở thích & Cảm xúc
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-900">Âm nhạc</h3>
+                            <p class="text-slate-600 text-sm mt-1.5 leading-relaxed">
+                                Không gian nuôi dưỡng tâm hồn, tái tạo năng lượng sáng tạo và giữ nhịp cân bằng sau những giờ học tập cường độ cao.
+                            </p>
+                        </div>
+                        <!-- Passion Meter -->
+                        <div class="space-y-2 pt-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span class="text-slate-500">Mức độ yêu thích</span>
+                                <span class="text-deepIndigo">92%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                                <div class="progress-bar-fill h-full rounded-full" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Tư duy phản biện -->
+                    <div class="tilt-card glass-card rounded-3xl p-7 space-y-5" data-tilt data-tilt-max="8" data-tilt-speed="400" data-aos="fade-up" data-aos-delay="400">
+                        <div class="flex items-center justify-between">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-sky-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-indigo-500/30">
+                                <i class="fa-solid fa-scale-balanced"></i>
+                            </div>
+                            <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 border border-indigo-200">
+                                Sở thích & Bản lĩnh
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-xl sm:text-2xl text-slate-900">Tư duy phản biện</h3>
+                            <p class="text-slate-600 text-sm mt-1.5 leading-relaxed">
+                                Luôn đặt câu hỏi "Tại sao?", lắng nghe góc nhìn đối lập và xây dựng hệ thống luận điểm thuyết phục, khách quan.
+                            </p>
+                        </div>
+                        <!-- Passion Meter -->
+                        <div class="space-y-2 pt-1">
+                            <div class="flex justify-between text-xs font-semibold">
+                                <span class="text-slate-500">Mức độ yêu thích</span>
+                                <span class="text-deepIndigo">95%</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-200/80 rounded-full overflow-hidden">
+                                <div class="progress-bar-fill h-full rounded-full" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS & ACTIVITIES SHOWCASE -->
+        <section id="showcase" class="py-20 px-6">
+            <div class="max-w-5xl mx-auto space-y-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4" data-aos="fade-up">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-deepIndigo">03 / Dấu ấn hành trình</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 mt-2 title-glow">
+                            Dự án & <span class="gradient-text">Hoạt động nổi bật</span>
+                        </h2>
+                    </div>
+                    <p class="text-sm text-slate-600 max-w-xs">
+                        Nhấp vào thẻ hoạt động để xem chi tiết góc nhìn và trải nghiệm rèn luyện.
+                    </p>
+                </div>
+
+                <!-- Interactive Showcase Card: Debate Club -->
+                <div class="tilt-card glass-card rounded-[2.25rem] overflow-hidden border border-white/90" data-tilt data-tilt-max="4" data-tilt-speed="500" data-aos="fade-up">
+                    <div class="grid grid-cols-1 lg:grid-cols-12">
+                        <!-- Visual Side -->
+                        <div class="lg:col-span-5 relative min-h-[260px] bg-gradient-to-br from-sky-400 via-royalBlue to-deepIndigo p-8 flex flex-col justify-between text-white overflow-hidden">
+                            <img 
+                                src="debate-activity.jpg" 
+                                alt="Debate Club & Tư duy Toán học"
+                                onerror="this.style.display='none'"
+                                class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-45"
+                            >
+                            <div class="relative z-10 flex items-center justify-between">
+                                <span class="px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold tracking-wider uppercase">
+                                    Featured Activity
+                                </span>
+                                <span class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+                                    <i class="fa-solid fa-comments"></i>
+                                </span>
+                            </div>
+
+                            <div class="relative z-10 mt-12">
+                                <p class="text-electricCyan text-xs font-bold uppercase tracking-widest mb-1">Academic & Critical Thinking</p>
+                                <h3 class="font-display font-extrabold text-3xl">Debate Club</h3>
+                            </div>
+                        </div>
+
+                        <!-- Content Side -->
+                        <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-lg bg-sky-100/80 text-sky-800 text-xs font-semibold">#TưDuyToánHọc</span>
+                                    <span class="px-3 py-1 rounded-lg bg-indigo-100/80 text-deepIndigo text-xs font-semibold">#LậpLuậnSắcBén</span>
+                                    <span class="px-3 py-1 rounded-lg bg-cyan-100/80 text-cyan-800 text-xs font-semibold">#GiảiQuyếtVấnĐề</span>
+                                </div>
+
+                                <h4 class="font-display font-bold text-2xl text-slate-900">
+                                    Debate Club – Nơi tư duy logic gặp gỡ nghệ thuật lập luận
+                                </h4>
+
+                                <p class="text-slate-700 leading-relaxed text-base">
+                                    Hành trình học tập và phát triển tư duy Toán học, rèn luyện khả năng phân tích, lập luận và giải quyết vấn đề.
+                                </p>
+
+                                <!-- Expandable Interactive Details -->
+                                <div id="debate-details" class="hidden pt-2 border-t border-slate-200/80 space-y-2.5 text-sm text-slate-600 animate-fadeIn">
+                                    <div class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-circle-check text-sky-500 mt-1"></i>
+                                        <span><strong>Cấu trúc hóa luận điểm:</strong> Áp dụng tư duy chứng minh Toán học vào việc xây dựng hệ thống lập luận chặt chẽ, không kẽ hở.</span>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
+                                        <i class="fa-solid fa-circle-check text-deepIndigo mt-1"></i>
+                                        <span><strong>Phản biện đa chiều:</strong> Rèn luyện sự bình tĩnh, nhạy bén trước những góc nhìn mới và giải quyết vấn đề dưới áp lực thời gian.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex items-center justify-between">
+                                <button onclick="toggleDebateDetails()" id="debate-btn" class="inline-flex items-center gap-2 text-sm font-bold text-deepIndigo hover:text-sky-600 transition-colors">
+                                    <span>Xem thêm chiều sâu trải nghiệm</span>
+                                    <i id="debate-icon" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                                </button>
+                                <span class="text-xs font-medium text-slate-400">THPT Chuyên Bến Tre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PERSONAL VIBE / QUOTE & MEMORIES GALLERY -->
+        <section id="memories" class="py-20 px-6">
+            <div class="max-w-6xl mx-auto space-y-12">
+                
+                <!-- Quote Banner -->
+                <div class="glass-card rounded-[2.25rem] p-8 sm:p-12 text-center relative overflow-hidden" data-aos="zoom-in">
+                    <div class="absolute top-4 left-8 text-6xl font-display text-sky-400/25 select-none">&ldquo;</div>
+                    <div class="absolute bottom-0 right-8 text-6xl font-display text-deepIndigo/20 select-none">&rdquo;</div>
+                    
+                    <span class="text-xs font-bold uppercase tracking-[0.25em] text-deepIndigo">04 / Góc cảm xúc & Ký ức</span>
+                    <blockquote class="font-display font-extrabold text-2xl sm:text-4xl lg:text-5xl mt-4 mb-3 gradient-text title-glow">
+                        “Little Moments, Big Memories”
+                    </blockquote>
+                    <p class="text-slate-600 font-medium text-base sm:text-lg">
+                        Những khoảnh khắc nhỏ, những ký ức lớn — Lưu giữ vẻ đẹp bình yên của thiên nhiên và thanh xuân.
+                    </p>
+                </div>
+
+                <!-- Scenic Photo Gallery (Đà Lạt, Biển Vũng Tàu, Cảnh đẹp) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    
+                    <!-- Photo 1: Đà Lạt -->
+                    <div class="tilt-card glass-card rounded-3xl p-3.5 group cursor-pointer" data-tilt data-tilt-max="7" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox('dalat.jpg', 'Đà Lạt Mộng Mơ', 'Sương mờ phố núi, thông reo và những khoảng lặng dịu êm.')">
+                        <div class="relative rounded-2xl overflow-hidden aspect-[4/3]">
+                            <img 
+                                src="dalat.jpg" 
+                                alt="Đà Lạt" 
+                                onerror="this.src='https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=800&q=80'"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <span class="text-[11px] uppercase tracking-wider text-electricCyan font-semibold">Highland Breeze</span>
+                                <h3 class="font-display font-bold text-xl">Đà Lạt</h3>
+                                <p class="text-xs text-slate-200 line-clamp-1 mt-0.5">Sương mờ phố núi & những buổi chiều bình yên</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo 2: Biển Vũng Tàu -->
+                    <div class="tilt-card glass-card rounded-3xl p-3.5 group cursor-pointer" data-tilt data-tilt-max="7" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox('vungtau.jpg', 'Biển Vũng Tàu', 'Nắng gió đại dương xanh thẳm, nơi mọi suy nghĩ được tự do bay bổng.')">
+                        <div class="relative rounded-2xl overflow-hidden aspect-[4/3]">
+                            <img 
+                                src="vungtau.jpg" 
+                                alt="Biển Vũng Tàu" 
+                                onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <span class="text-[11px] uppercase tracking-wider text-electricCyan font-semibold">Ocean Horizon</span>
+                                <h3 class="font-display font-bold text-xl">Biển Vũng Tàu</h3>
+                                <p class="text-xs text-slate-200 line-clamp-1 mt-0.5">Sóng xanh rì rào & chân trời rộng mở</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo 3: Cảnh đẹp thiên nhiên -->
+                    <div class="tilt-card glass-card rounded-3xl p-3.5 group cursor-pointer" data-tilt data-tilt-max="7" data-aos="fade-up" data-aos-delay="300" onclick="openLightbox('scenery.jpg', 'Khung Trời Bình Yên', 'Những góc nhìn nhỏ bé nhưng đong đầy cảm hứng sống.')">
+                        <div class="relative rounded-2xl overflow-hidden aspect-[4/3]">
+                            <img 
+                                src="scenery.jpg" 
+                                alt="Cảnh đẹp thiên nhiên" 
+                                onerror="this.src='https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80'"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white">
+                                <span class="text-[11px] uppercase tracking-wider text-electricCyan font-semibold">Sky & Nature</span>
+                                <h3 class="font-display font-bold text-xl">Khoảnh Khắc Thiên Nhiên</h3>
+                                <p class="text-xs text-slate-200 line-clamp-1 mt-0.5">Ánh nắng, mây trời & ký ức thanh xuân</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CONNECT / SOCIAL MEDIA SECTION -->
+        <section id="connect" class="pt-16 pb-24 px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-card rounded-[2.5rem] p-8 sm:p-14 text-center space-y-8 relative overflow-hidden" data-aos="fade-up">
+                    <div class="space-y-3">
+                        <span class="text-xs font-bold uppercase tracking-[0.2em] text-deepIndigo">05 / Kết nối</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 title-glow">
+                            Cùng trò chuyện & <span class="gradient-text">Chia sẻ</span>
+                        </h2>
+                        <p class="text-slate-600 max-w-lg mx-auto text-sm sm:text-base">
+                            Luôn sẵn sàng kết nối để trao đổi về Toán học, khoa học, tranh biện, âm nhạc hoặc đơn giản là một lời chào thân thiện.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Social Buttons -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-pill glass-card px-6 py-3.5 rounded-2xl flex items-center gap-3 font-display font-semibold text-slate-800">
+                            <i class="fa-brands fa-facebook-f text-lg text-blue-600"></i>
+                            <span>Facebook</span>
+                        </a>
+
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-pill glass-card px-6 py-3.5 rounded-2xl flex items-center gap-3 font-display font-semibold text-slate-800">
+                            <i class="fa-brands fa-instagram text-lg text-pink-600"></i>
+                            <span>Instagram</span>
+                        </a>
+
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-pill glass-card px-6 py-3.5 rounded-2xl flex items-center gap-3 font-display font-semibold text-slate-800">
+                            <i class="fa-brands fa-github text-lg text-slate-900"></i>
+                            <span>GitHub</span>
+                        </a>
+
+                        <a href="mailto:maithanhnhu@example.com" class="social-pill glass-card px-6 py-3.5 rounded-2xl flex items-center gap-3 font-display font-semibold text-slate-800">
+                            <i class="fa-regular fa-envelope text-lg text-deepIndigo"></i>
+                            <span>Email</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/70 bg-white/40 backdrop-blur-md py-8 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-600">
+            <p class="font-medium">
+                &copy; 2026 <span class="font-bold text-slate-900">Mai Thanh Như</span>. Crafted with logic & creativity.
+            </p>
+            <p class="text-slate-500">
+                Curious Mind &middot; Logical Thinker &middot; Creative Soul
+            </p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal for Gallery -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-md items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="glass-card max-w-2xl w-full rounded-3xl p-4 relative" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-white text-slate-800 shadow-lg flex items-center justify-center hover:bg-deepIndigo hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="lightbox-img" src="" alt="" class="w-full max-h-[65vh] object-cover rounded-2xl">
+            <div class="pt-4 px-2 pb-1">
+                <h4 id="lightbox-title" class="font-display font-bold text-xl text-slate-900"></h4>
+                <p id="lightbox-desc" class="text-sm text-slate-600 mt-1"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts: AOS & Vanilla Tilt -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+    <script>
+        // 1. Initialize AOS (Animate On Scroll)
+        AOS.init({
+            once: true,
+            offset: 60,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+
+        // 2. Initialize Vanilla Tilt on desktop devices
+        if (window.innerWidth > 768) {
+            VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+                max: 8,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.25,
+            });
+        }
+
+        // 3. Toggle Debate Club Details
+        function toggleDebateDetails() {
+            const details = document.getElementById('debate-details');
+            const icon = document.getElementById('debate-icon');
+            const btnText = document.querySelector('#debate-btn span');
+            
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                btnText.textContent = 'Thu gọn chi tiết';
+            } else {
+                details.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                btnText.textContent = 'Xem thêm chiều sâu trải nghiệm';
+            }
+        }
+
+        // 4. Lightbox Functions for Scenic Gallery
+        function openLightbox(src, title, desc) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            // Fallback if local file isn't uploaded yet
+            img.onerror = function() {
+                if (src.includes('dalat')) this.src = 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1000&q=80';
+                else if (src.includes('vungtau')) this.src = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80';
+                else this.src = 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=80';
+            };
+            document.getElementById('lightbox-title').textContent = title;
+            document.getElementById('lightbox-desc').textContent = desc;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        // 5. Subtle Sky & Tech Constellation Particle Canvas
+        const canvas = document.getElementById('sky-particles');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.2 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.45;
+                this.speedY = (Math.random() - 0.5) * 0.45;
+                this.color = Math.random() > 0.5 ? 'rgba(0, 198, 255, 0.45)' : 'rgba(106, 17, 203, 0.35)';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(window.innerWidth / 22), 65);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(37, 117, 252, ${0.12 - dist / 1100})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
